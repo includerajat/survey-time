@@ -10,39 +10,82 @@ class Header extends Component {
         return;
       case false:
         return (
-          <li>
-            <a href="/auth/google">Login With Google</a>
+          <li className="nav-item mt-2">
+            <a className="nav-link btn btn-outline-primary" href="/auth/google">
+              Login With Google <i className="bi bi-google"></i>
+            </a>
           </li>
         );
       default:
         return (
           <React.Fragment>
-            <li>
+            <li className="nav-item ms-5" style={{ marginTop: "16px" }}>
               <Payments />
             </li>
-            <li style={{ margin: "0 10px" }}>
-              Credits : {this.props.auth.credits}
-            </li>
-            <li>
-              <a href="/api/logout">Logout</a>
+            <li className="nav-item">
+              <a
+                className="nav-link btn btn-outline-danger ms-5 "
+                href="/api/logout"
+                style={{ marginTop: "16px" }}
+              >
+                Logout
+              </a>
             </li>
           </React.Fragment>
         );
     }
   }
+  renderCredit() {
+    if (this.props.auth) {
+      return `Credits : ${this.props.auth.credits}`;
+    }
+    return;
+  }
+  renderName() {
+    if (this.props.auth) {
+      return (
+        <p className="lead text-center text-primary">
+          WELCOME {this.props.auth.name} !!!!
+        </p>
+      );
+    }
+    return;
+  }
   render() {
     return (
-      <nav>
-        <div className="nav-wrapper">
-          <Link
-            to={this.props.auth ? "/surveys" : "/"}
-            className="left brand-logo"
-          >
-            Emaily
-          </Link>
-          <ul className="right">{this.renderContent()}</ul>
-        </div>
-      </nav>
+      <div>
+        <nav className="navbar navbar-expand-lg sticky-top navbar-light bg-light mb-3">
+          <div className="container-fluid">
+            <Link
+              to={this.props.auth ? "/surveys" : "/"}
+              className="navbar-brand"
+            >
+              SurveyTime
+            </Link>
+            <span style={{ marginLeft: "60%" }}>{this.renderCredit()}</span>
+            <button
+              className="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span className="navbar-toggler-icon"></span>
+            </button>
+            <div
+              className="collapse navbar-collapse"
+              id="navbarSupportedContent"
+            >
+              <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                {this.renderContent()}
+              </ul>
+            </div>
+          </div>
+        </nav>
+        {this.renderName()}
+      </div>
     );
   }
 }

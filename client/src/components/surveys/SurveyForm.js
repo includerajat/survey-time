@@ -24,14 +24,18 @@ class SurveyForm extends React.Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.props.handleSubmit(this.props.onSurveySubmit)}>
+        <form
+          className="mb-4"
+          onSubmit={this.props.handleSubmit(this.props.onSurveySubmit)}
+        >
           {this.renderFields()}
-          <Link to="/surveys" className="red btn-flat white-text">
+          <Link to="/surveys" className="btn btn-danger">
             Cancel
+            <i className="bi bi-x-circle ms-2"></i>
           </Link>
-          <button className="teal btn-flat right white-text" type="submit">
+          <button className="btn btn-success float-end" type="submit">
             Next
-            <i className="material-icons right">done</i>
+            <i className="bi bi-check2-circle ms-2"></i>
           </button>
         </form>
       </div>
