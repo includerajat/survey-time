@@ -11,22 +11,27 @@ function Landing(props) {
           Go To Dashboard
         </Link>
       );
-    } else {
+    } else if (props.auth === false) {
       return (
-        <a
-          style={{ width: "60%" }}
-          className="nav-link btn btn-outline-primary mx-auto"
-          href="/auth/google"
-        >
-          Login With Google <i className="bi bi-google"></i>
-        </a>
+        <React.Fragment>
+          <a
+            style={{ width: "60%" }}
+            className="nav-link btn btn-outline-primary mx-auto"
+            href="/auth/google"
+          >
+            Login With Google <i className="bi bi-google"></i>
+          </a>
+          <p className="lead mt-3">
+            First Time Login ? If yes then you will get free 2 credits.
+          </p>
+        </React.Fragment>
       );
     }
   };
   return (
     <div style={{ textAlign: "center" }}>
       <h1>SurveyTime!</h1>
-      <p>
+      <p className="lead">
         What is problem in our Company ? !!! <br />
         Why are customers not connect with our Company ? !! <br />
         Ok do one thing <strong>Survey</strong> <br />

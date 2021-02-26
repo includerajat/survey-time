@@ -16,7 +16,45 @@ module.exports = (app) => {
     }).select({
       recipients: false,
     });
-    res.send(surveys);
+    if (surveys.length === 0) {
+      return res.send(["No Survey"]);
+    }
+    const unArchiveSurveys = surveys.filter(
+      (survey) => survey.isArchive === false
+    );
+    res.send(unArchiveSurveys);
+  });
+  app.get("/api/archiveSurveys", requireLogin, async (req, res) => {
+    const surveys = await Survey.find({
+      _user: req.user.id,
+    }).select({
+      recipients: false,
+    });
+    if (surveys.length === 0) {
+      return res.send(["No Survey"]);
+    }
+    const unArchiveSurveys = surveys.filter(
+      (survey) => survey.isArchive === true
+    );
+    res.send(unArchiveSurveys);
+  });
+
+  app.get("/api/:id/archive", requireLogin, async (req, res) => {
+    console.log("Hello");
+    const survey = await Survey.findByIdAndUpdate(
+      req.params.id,
+      { isArchive: true },
+      { new: true }
+    );
+    const surveys = await Survey.find({
+      _user: req.user.id,
+    }).select({
+      recipients: false,
+    });
+    const unArchiveSurveys = surveys.filter(
+      (survey) => survey.isArchive === false
+    );
+    res.send(unArchiveSurveys);
   });
 
   app.get("/api/surveys/:surveyId/thanks/:choice", (req, res) => {

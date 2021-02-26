@@ -62,7 +62,7 @@ class Header extends Component {
             >
               SurveyTime
             </Link>
-            <span style={{ marginLeft: "60%" }}>{this.renderCredit()}</span>
+            <span>{this.renderCredit()}</span>
             <button
               className="navbar-toggler"
               type="button"

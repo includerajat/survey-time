@@ -13,6 +13,12 @@ const Dashboard = () => {
           <span className="me-4"> Add a new Survey</span>
           <i className="bi bi-plus-circle-fill"></i>
         </Link>
+        <Link
+          to="/surveys/myArchives"
+          className="btn btn-outline-primary btn-lg float-end mt-3"
+        >
+          <span className="me-4">My Archives</span>
+        </Link>
       </div>
       <SurveyList />
       <div>

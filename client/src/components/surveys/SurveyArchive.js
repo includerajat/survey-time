@@ -1,10 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchSurveys, archiveSurvey } from "../../actions";
+import { archiveSurveys } from "../../actions";
 
-class SurveyList extends React.Component {
+class SurveyArchive extends React.Component {
   componentDidMount() {
-    this.props.fetchSurveys();
+    this.props.archiveSurveys();
   }
   renderSurveys() {
     return this.props.surveys.reverse().map((survey) => {
@@ -15,30 +15,14 @@ class SurveyList extends React.Component {
             style={{ textAlign: "center" }}
             className="lead my-3"
           >
-            You haven't any survey . Make a new survey hit the
-            <em> Add a new Survey </em>
-            button and start your journey in <strong>Survey Time</strong>.
+            You haven't any archive survey .
           </div>
         );
       }
       return (
         <div className="col-md-12 col-xl-6" key={survey._id}>
           <div className="card text-center m-3">
-            <div className="card-header">
-              Survey
-              <span>
-                <button
-                  onClick={() => this.props.archiveSurvey(survey._id)}
-                  type="button"
-                  className="btn btn-outline-secondary ms-3"
-                  data-bs-toggle="tooltip"
-                  data-bs-placement="top"
-                  title="Archieve the survey"
-                >
-                  <i className="bi bi-archive"></i>
-                </button>
-              </span>
-            </div>
+            <div className="card-header">Survey</div>
             <div className="card-body">
               <h5 className="card-title">{survey.title}</h5>
               <p className="card-text">{survey.body}</p>
@@ -47,15 +31,15 @@ class SurveyList extends React.Component {
             </div>
             <div className="card-footer text-muted">
               <span>
-                Sent On : {new Date(survey.dateSent).toLocaleDateString()} ,
+                Sent On : {new Date(survey.dateSent).toLocaleDateString()}{" "}
               </span>
               {survey.lastResponded ? (
                 <span>
-                  &nbsp;Last Response :{" "}
+                  Last Response :{" "}
                   {new Date(survey.lastResponded).toLocaleDateString()}
                 </span>
               ) : (
-                "Last Response : No response come"
+                ""
               )}
             </div>
           </div>
@@ -81,9 +65,7 @@ class SurveyList extends React.Component {
     return body;
   }
 }
-const mapStateToProps = ({ surveys }) => {
+const mapStateToProps = ({ archiveSurveys: surveys }) => {
   return { surveys };
 };
-export default connect(mapStateToProps, { fetchSurveys, archiveSurvey })(
-  SurveyList
-);
+export default connect(mapStateToProps, { archiveSurveys })(SurveyArchive);

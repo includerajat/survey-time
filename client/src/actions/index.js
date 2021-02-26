@@ -1,5 +1,5 @@
 import axios from "axios";
-import { FETCH_USER, FETCH_SURVEYS } from "./types";
+import { FETCH_USER, FETCH_SURVEYS, ARCHIVE_SURVEYS } from "./types";
 
 export const fetchUser = () => async (dispatch) => {
   const response = await axios.get("/api/current_user");
@@ -32,6 +32,23 @@ export const fetchSurveys = () => async (dispatch) => {
 
   dispatch({
     type: FETCH_SURVEYS,
+    payload: res.data,
+  });
+};
+
+export const archiveSurvey = (id) => async (dispatch) => {
+  const res = await axios.get(`/api/${id}/archive`);
+
+  dispatch({
+    type: FETCH_SURVEYS,
+    payload: res.data,
+  });
+};
+export const archiveSurveys = () => async (dispatch) => {
+  const res = await axios.get(`/api/archiveSurveys`);
+
+  dispatch({
+    type: ARCHIVE_SURVEYS,
     payload: res.data,
   });
 };

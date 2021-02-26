@@ -33,6 +33,7 @@ passport.use(
       const user = await new User({
         googleId: profile.id,
         name: profile.name.givenName,
+        credits: 2,
       }).save();
       done(null, user);
     }

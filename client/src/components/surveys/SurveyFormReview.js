@@ -18,6 +18,7 @@ const SurveyReview = ({ onCancel, formValues, submitSurvey, history }) => {
   const classes = disable
     ? `btn btn-success float-end disabled`
     : "btn btn-success float-end";
+
   return (
     <div className="mb-3">
       <h5 className="text-center">Please confirm your survey</h5>
